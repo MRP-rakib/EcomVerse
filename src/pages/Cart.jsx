@@ -8,7 +8,10 @@ import { FaAngleDown } from "react-icons/fa";
 function Cart() {
 const dispatch= useDispatch()
 const product = useSelector(state=>state.cart)
-const subtotal = product.reduce((acc,item)=>acc+ item.newPrice*item.quantity,0).toFixed(2)
+const subtotal = product.reduce((acc,item)=>acc+ item.newPrice*item.quantity,0)
+const shipping = 10
+const discount = 0
+const total = (subtotal + shipping) - ((subtotal) * (discount / 100));
 
   return (
     <div className='container pt-[80px] pb-[140px]'>
@@ -35,7 +38,7 @@ const subtotal = product.reduce((acc,item)=>acc+ item.newPrice*item.quantity,0).
                       <figure className='w-[30px] h-[20px] lg:w-[50px] lg:h-[40px] gap-5 overflow-hidden object-cover'>
                           <img src={product.image} alt="image" />
                       </figure>
-                      <p className='text-[14] lg:text-[16px] text-nowrap line-clamp-1'>{product.title}</p>
+                      <p className='text-[14] lg:text-[16px] text-nowrap line-clamp-1'>{product.title.slice(0,35)}...</p>
                   </td>
                   <td className='text-[14] lg:text-[16px] px-5 py-3 lg:px-10 lg:py-6'>${product.newPrice}</td>
                   <td className='text-[14] lg:text-[16px] px-5 py-3 lg:px-10 lg:py-6'>
@@ -47,7 +50,7 @@ const subtotal = product.reduce((acc,item)=>acc+ item.newPrice*item.quantity,0).
                           </span>
                       </span>
                   </td>
-                  <td className='text-[14] lg:text-[16px] px-5 py-3 lg:px-10 lg:py-6'>${((product.newPrice).toFixed(2))*(product.quantity)}</td>
+                  <td className='text-[14] lg:text-[16px] px-5 py-3 lg:px-10 lg:py-6'>${(product.newPrice)*(product.quantity)}</td>
               </tr>))}
                   
                
@@ -83,11 +86,15 @@ const subtotal = product.reduce((acc,item)=>acc+ item.newPrice*item.quantity,0).
                     </li>
                 <li className='flex justify-between py-4 text-[14] lg:text-[16px] font-normal'>
                     <p>Shipping:</p>
-                    <p></p>
+                    <p>{subtotal&&shipping}</p>
+                    </li>
+                <li className='flex justify-between py-4 text-[14] lg:text-[16px] font-normal'>
+                    <p>Discount:</p>
+                    <p>{subtotal&&discount}</p>
                     </li>
                 <li className='flex justify-between py-4 text-[14] lg:text-[16px] font-normal'>
                     <p>Total:</p>
-                    <p></p>
+                    <p>{subtotal&&total}</p>
                     </li>
              </ul>
              <span className='flex justify-center pt-4'>
