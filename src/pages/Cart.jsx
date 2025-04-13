@@ -35,7 +35,7 @@ const subtotal = product.reduce((acc,item)=>acc+ item.newPrice*item.quantity,0).
                       <figure className='w-[30px] h-[20px] lg:w-[50px] lg:h-[40px] gap-5 overflow-hidden object-cover'>
                           <img src={product.image} alt="image" />
                       </figure>
-                      <p className='text-[14] lg:text-[16px] text-nowrap'>{product.title}</p>
+                      <p className='text-[14] lg:text-[16px] text-nowrap line-clamp-1'>{product.title}</p>
                   </td>
                   <td className='text-[14] lg:text-[16px] px-5 py-3 lg:px-10 lg:py-6'>${product.newPrice}</td>
                   <td className='text-[14] lg:text-[16px] px-5 py-3 lg:px-10 lg:py-6'>
