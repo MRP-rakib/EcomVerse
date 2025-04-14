@@ -6,6 +6,7 @@ import BestSelling from './components/BestSelling'
 import OurProduct from './components/OurProduct'
 import MusicSection from './components/MusicSection'
 import NewArrival from './components/NewArrival'
+import SkeletonCard from './components/SkeletonCard'
 
 function Home() {
  
@@ -18,6 +19,7 @@ function Home() {
      <MusicSection/>
      <OurProduct/>
      <NewArrival/>
+     {/* <SkeletonCard/> */}
     </div>
   )
 }

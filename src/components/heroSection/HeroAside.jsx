@@ -5,23 +5,36 @@ import { products } from '../../redux/apiSlice';
 
 function HeroAside() {
   const dispath = useDispatch()
-  const {data,status}= useSelector(state=>state.product)
+  const { data, status } = useSelector(state => state.product)
 
-  useEffect(()=>{
+  useEffect(() => {
     dispath(products())
-  },[dispath])
-  const categories = [...new Set(data.map(cat=>cat.category))]
-  if(status==="loading") return <div>Loading...</div>
-  if(status==="failed") return <div>error...</div>
+  }, [dispath])
+  const categories = [...new Set(data.map(cat => cat.category))]
+  if (status === "failed") return <div>error...</div>
   return (
     <div className='w-[50%] lg:w-full'>
       <ul className='lg:pr-4 pt-5 lg:pt-10 gap-4 flex flex-col capitalize'>
-        {categories.map((cate,index)=>(
-          <li key={index} className='flex items-center justify-between text-[12px] lg:text-[16px] cursor-pointer'>
-          <p className='text-nowrap'>{cate}</p>
-          {data.category?<span><FaAngleRight /></span>:''}
-        </li>))}
-        </ul>
+        {status === "loading"
+          ? Array.from({ length: 9 }).map((_, index) => (
+            <li
+              key={index}
+              className="flex items-center justify-between py-1 animate-pulse"
+            >
+              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+              <div className="h-4 bg-gray-200 rounded w-4"></div>
+            </li>
+          ))
+          : categories.map((cate, index) => (
+            <li
+              key={index}
+              className="flex items-center justify-between text-[12px] lg:text-[16px] cursor-pointer py-1"
+            >
+              <p className="whitespace-nowrap">{cate}</p>
+              <span><FaAngleRight /></span>
+            </li>
+          ))}
+      </ul>
     </div>
   )
 }
