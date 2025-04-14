@@ -14,7 +14,7 @@ function HeroAside() {
   if (status === "failed") return <div>error...</div>
   return (
     <div className='w-[50%] lg:w-full'>
-      <ul className='lg:pr-4 pt-5 lg:pt-10 gap-4 flex flex-col capitalize'>
+      <ul className='lg:pr-4 pt-5 lg:pt-10 gap-2 lg:gap-4 flex flex-col capitalize'>
         {status === "loading"
           ? Array.from({ length: 9 }).map((_, index) => (
             <li
