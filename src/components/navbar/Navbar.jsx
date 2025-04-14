@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import NavHeading from './NavHeading'
 import { IoIosSearch } from "react-icons/io";
 import { CiHeart } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import NavMenu from './NavMenu';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { IoMdClose } from "react-icons/io";
 
 function Navbar() {
@@ -13,6 +13,8 @@ function Navbar() {
     const handelClick = () => {
         setIsTrue(!istrue)
     }
+    const location = useLocation()
+    
     return (
         <div className='border-b-[0.5px] border-[rgba(0,0,0,0.3)] pb-4'>
             <NavHeading headline='Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!' />
@@ -26,7 +28,9 @@ function Navbar() {
                         <Input/>
                     </div>
                     <div className='flex items-center gap-4'>
-                        <Link to='/wishlist' className='text-[30px]'><CiHeart /></Link>
+                        {location?.pathname!=='/wishlist'&&
+                        <Link to='/wishlist' className='text-[30px]'><CiHeart /></Link>}
+                        
                         <Link to='/cart' className='text-[30px]'><CiShoppingCart /></Link>
                         <Link to='/user' className='text-[30px]'><CiUser /></Link>
                     </div>

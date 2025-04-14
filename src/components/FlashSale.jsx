@@ -27,9 +27,11 @@ function FlashSale() {
        </div>
        <ArrowBtn/>
     </div>
-   <div className='pt-5 lg:pt-10'>
-    <Card product={flashSale}/>      
-    </div>
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-7.5 pt-5 lg:pt-10'>
+   {flashSale.slice(0,4).map(product=>(
+    <Card key={product._id} product={product}/>      
+  ))}
+  </div>
     <div className='flex justify-center py-7.5 lg:py-[60px]'>
     <span>
         <Button btnName="View All Products"/>

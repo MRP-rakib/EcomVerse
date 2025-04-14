@@ -8,6 +8,7 @@ import MusicSection from './components/MusicSection'
 import NewArrival from './components/NewArrival'
 
 function Home() {
+ 
   return (
     <div className='container'>
      <Hero/>

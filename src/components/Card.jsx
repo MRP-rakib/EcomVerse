@@ -1,33 +1,59 @@
-import React from 'react'
-// import Image from '../assets/images/image1.png'
+import React, { useState } from 'react'
+import { RiDeleteBinLine } from "react-icons/ri";
 import { FaStar } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { LuEye } from "react-icons/lu";
-import { useDispatch } from 'react-redux';
+import { IoIosHeart } from "react-icons/io";
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/cartSlice';
+import { addWishList, deleteWishlist } from '../redux/wishlist';
+import { useLocation } from 'react-router';
+
 
 
 
 function Card({ product }) {
     const dispatch = useDispatch()
-    const handelAddToCart=(product)=>{
-        dispatch(addToCart(product))    
+    const handelAddToCart = (product) => {
+        dispatch(addToCart(product))
     }
-return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-7.5'>
-            {product.map(product => (
-            
-                <div key={product._id} className='text-[16px] cursor-pointer font-medium'>
+    
+    const handeladdWishlist = (product) => {
+        dispatch(addWishList(product))
+        
+    }
+    const handelDelete = (product) => {
+        dispatch(deleteWishlist(product))
+        
+    }
+    const wishlist = useSelector(state=>state.wishlist)
+    const location = useLocation()
+    const isWishlist=wishlist.some(item=>item._id===product._id)
+    
+    return (
+        <div className='text-[16px] cursor-pointer font-medium'>
                     <div className='relative group flex rounder-[4px] overflow-hidden justify-center items-center h-[250px] bg-[#F5F5F5]'>
                         <img className='w-full object-bottom' src={product.image} alt="image" />
-                        <span onClick={()=>handelAddToCart(product)}  className='lg:group-hover:bottom-0 lg:group-hover:opacity-100 lg:group-hover:visible absolute bottom-0 lg:bottom-[10px] transition-all duration-300 lg:opacity-0 lg:invisible w-full py-2 text-center bg-[#000000] text-white'>
+                        <span onClick={() => handelAddToCart(product)} className='lg:group-hover:bottom-0 lg:group-hover:opacity-100 lg:group-hover:visible absolute bottom-0 lg:bottom-[10px] transition-all duration-300 lg:opacity-0 lg:invisible w-full py-2 text-center bg-[#000000] text-white'>
                             <p>Add To Cart</p>
                         </span>
                         <span className='absolute top-3 left-3 py-1 px-3 bg-[#DB4444] uppercase text-[#FAFAFA] text-[12px]'>{product.discount}&#37;</span>
                         {/* <span className='absolute top-12 left-3 py-1 px-3 bg-[#00FF66] uppercase text-[#000000] text-[12px]'>{product.discount}&#37;</span> */}
                         <div className='absolute top-3 right-2.5 flex flex-col gap-2'>
-                            <span className='bg-[#FFFFFF] w-6 h-6 rounded-full flex items-center justify-center text-[18px]'><CiHeart /></span>
-                            <span className='bg-[#FFFFFF] w-6 h-6 rounded-full flex items-center justify-center text-[18px]'><LuEye /></span>
+                            {location?.pathname === "/wishlist"?
+                                (<span
+                                    onClick={() => handelDelete(product)}
+                                    className='bg-[#FFFFFF] w-6 h-6 rounded-full flex items-center justify-center text-[18px]'>
+                                    <RiDeleteBinLine />
+                                </span>):(<span
+                                    onClick={() => handeladdWishlist(product)}
+                                    className='bg-[#FFFFFF] w-6 h-6 rounded-full flex items-center justify-center text-[18px]'>
+                                        {isWishlist?<IoIosHeart/>:<CiHeart />}
+                                    
+                                </span>)
+                            }
+   
+                            {location?.pathname !== "/wishlist" && <span className='bg-[#FFFFFF] w-6 h-6 rounded-full flex items-center justify-center text-[18px]'><LuEye /></span>}
                         </div>
                     </div>
                     <div className='pt-4'>
@@ -48,12 +74,7 @@ return (
                         </div>
                     </div>
                 </div>
-            
-             ))}
-        </div>
-
-
-    )
+          )
 }
 
 export default Card

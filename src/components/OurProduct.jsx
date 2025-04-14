@@ -25,9 +25,11 @@ function OurProduct() {
             <ProductSection sectionType="our products" sectionName="Explore Our Products"/>
             <ArrowBtn/>
         </div>
-        <div className='pt-[30px] lg:pt-[60px]'>
-         <Card product={data}/>      
-          </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-7.5 pt-7.5 lg:pt-15'>
+   {data.slice(0,8).map(product=>(
+    <Card key={product._id} product={product}/>      
+  ))}
+  </div>
         <div className='flex justify-center pt-7.5 lg:pt-[60px]'>
         <span><Button btnName='View All Products'/></span>
         </div>

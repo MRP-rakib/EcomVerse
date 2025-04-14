@@ -23,9 +23,11 @@ function BestSelling() {
         <ProductSection sectionType='This Month' sectionName="Best Selling Products" />
         <Button btnName="view all" />
       </div>
-      <div className='pt-7.5 lg:pt-[60px]'>
-         <Card product={bestselling}/>      
-       </div>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-7.5 pt-7.5 lg:pt-15'>
+   {bestselling.slice(0,4).map(product=>(
+    <Card key={product._id} product={product}/>      
+  ))}
+  </div>
     </div>
   )
 }

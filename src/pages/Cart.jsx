@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IoIosClose } from "react-icons/io";
-import { Link } from 'react-router';
+import { Link, } from 'react-router';
 import { FaAngleUp } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa";
 import { decreaseItem, deleteItem, increaseItem } from '../redux/cartSlice';
@@ -19,6 +19,8 @@ function Cart() {
     const handelDeleteItem = (productId) => {
         dispatch(deleteItem(productId))
     }
+    
+    
     const subtotal = product.reduce((acc, item) => acc + item.newPrice * item.quantity, 0)
     const shipping = 10
     const discount = 0
