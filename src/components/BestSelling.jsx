@@ -5,6 +5,7 @@ import Card from './Card'
 import { useDispatch, useSelector } from 'react-redux'
 import { products } from '../redux/apiSlice'
 import SkeletonCard from './SkeletonCard'
+import { useNavigate } from 'react-router'
 
 function BestSelling() {
   const dispath = useDispatch()
@@ -16,12 +17,16 @@ function BestSelling() {
 
   const bestselling = data.filter(product => product.section === "Best Selling Products")
   if (status === "failed") return <p className='pt-6 lg:pt-[70px]'>error...</p>
+  const navigation = useNavigate()
+  const handelSeeAll =()=>{
+    navigation('product',{state:{allProduct:bestselling}})
+  }
 
   return (
     <div className='pt-6 lg:pt-[70px]'>
       <div className='flex items-end justify-between'>
         <ProductSection sectionType='This Month' sectionName="Best Selling Products" />
-        <Button btnName="view all" />
+        <Button onClick={handelSeeAll} btnName="view all" />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-7.5 pt-7.5 lg:pt-15">
         {status === "loading"

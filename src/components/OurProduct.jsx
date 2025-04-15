@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { products } from "../redux/apiSlice"
 import SkeletonCard from './SkeletonCard'
 import ArrowBtn from './button/ArrowBtn';
+import { useNavigate } from 'react-router'
 
 function OurProduct() {
   const dispatch = useDispatch()
@@ -23,6 +24,10 @@ function OurProduct() {
   }
   const handelprev = () => {
     setActiveCard(prev => (prev - cardsPerPage) % data.length)
+  }
+  const navigation = useNavigate()
+  const handelSeeAll =()=>{
+    navigation('product',{state:{allProduct:data}})
   }
 
   return (
@@ -46,7 +51,7 @@ function OurProduct() {
           ))}
       </div>
       <div className='flex justify-center pt-7.5 lg:pt-[60px]'>
-        <span><Button btnName='View All Products' /></span>
+        <Button onClick={handelSeeAll} btnName='View All Products' />
       </div>
 
     </div>

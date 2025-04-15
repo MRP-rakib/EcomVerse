@@ -12,6 +12,7 @@ import Wishlist from './pages/Wishlist.jsx'
 import User from './pages/User.jsx'
 import { Provider } from 'react-redux'
 import store from './redux/store.js'
+import Product from './components/Product.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='cart' element={<Cart/>}/>
         <Route path='wishlist' element={<Wishlist/>}/>
         <Route path='user' element={<User/>}/>
+        <Route path='product' element={<Product/>}/>
       </Route>
     </Routes>
     </BrowserRouter>

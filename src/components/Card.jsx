@@ -38,7 +38,6 @@ function Card({ product }) {
                     <p>Add To Cart</p>
                 </span>
                 <span className='absolute top-3 left-3 py-1 px-3 bg-[#DB4444] uppercase text-[#FAFAFA] text-[12px]'>{product.discount}&#37;</span>
-                {/* <span className='absolute top-12 left-3 py-1 px-3 bg-[#00FF66] uppercase text-[#000000] text-[12px]'>{product.discount}&#37;</span> */}
                 <div className='absolute top-3 right-2.5 flex flex-col gap-2'>
                     {location?.pathname === "/wishlist" ?
                         (<span
