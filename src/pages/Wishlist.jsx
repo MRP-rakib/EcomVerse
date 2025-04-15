@@ -18,7 +18,7 @@ function Wishlist() {
           <p className='text-[50px] md:text-[100px] lg:text-[150px] text-[rgba(0,0,0,0.2)]'>Empty</p>
         </div>) : (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-7.5'>
-          {product.slice(0, 4).map(product => (
+          {product.map(product => (
             <Card key={product._id} product={product} />
           ))}
         </div>
