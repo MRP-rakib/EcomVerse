@@ -61,7 +61,7 @@ function Card({ product }) {
                     <p className='text-[12px] lg:text-[16px] font-medium text-[#DB4444]'>&#36;{product.newPrice}</p>
                     <p className='text-[12px] lg:text-[16px] font-medium text-[rgba(0,0,0,0.5)] line-through'>&#36;{product.previousPrice}</p>
                 </span>
-                <div className='flex gap-2 items-center'>
+                {location.pathname!=='/wishlist'&&<div className='flex gap-2 items-center'>
                     <div className='flex text-[12px] lg:text-[18px] items-center text-[#FFAD33]'>
                         <span><FaStar /></span>
                         <span><FaStar /></span>
@@ -70,7 +70,8 @@ function Card({ product }) {
                         <span><FaStar /></span>
                     </div>
                     <p className='text-[14px] text-[rgba(0,0,0,0.5)] font-semibold'>(00)</p>
-                </div>
+                </div>}
+                
             </div>
         </div>
     )
