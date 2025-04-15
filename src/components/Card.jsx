@@ -32,8 +32,8 @@ function Card({ product }) {
 
     return (
         <div className='text-[16px] cursor-pointer font-medium'>
-            <div className='relative group flex rounder-[4px] overflow-hidden justify-center items-center h-[250px] bg-[#F5F5F5]'>
-                <img className='w-full object-bottom' src={product.image} alt="image" />
+            <div className='relative group flex  rounded-[4px] overflow-hidden justify-center items-center h-[250px] bg-[#F5F5F5]'>
+                <img className='w-full h-full object-fill' src={product.image} alt="image" />
                 <span onClick={() => handelAddToCart(product)} className='lg:group-hover:bottom-0 lg:group-hover:opacity-100 lg:group-hover:visible absolute bottom-0 lg:bottom-[10px] transition-all duration-300 lg:opacity-0 lg:invisible w-full py-2 text-center bg-[#000000] text-white'>
                     <p>Add To Cart</p>
                 </span>
