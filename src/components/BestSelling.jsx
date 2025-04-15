@@ -26,7 +26,7 @@ function BestSelling() {
     <div className='pt-6 lg:pt-[70px]'>
       <div className='flex items-end justify-between'>
         <ProductSection sectionType='This Month' sectionName="Best Selling Products" />
-        <Button onClick={handelSeeAll} btnName="view all" />
+        <Button onClick={handelSeeAll} btnName="View all" />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-7.5 pt-7.5 lg:pt-15">
         {status === "loading"
