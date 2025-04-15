@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductSection from './ProductSection'
-// import Counter from './Counter'
 import Button from './button/Button'
-import ArrowBtn from './button/ArrowBtn'
 import Card from './Card'
 import { useDispatch, useSelector } from 'react-redux'
 import { products } from '../redux/apiSlice'
 import SkeletonCard from './SkeletonCard'
+import ArrowBtn from './button/ArrowBtn';
 
 function FlashSale() {
   const dispath = useDispatch()
@@ -17,22 +16,36 @@ function FlashSale() {
   }, [dispath])
   const flashSale = data.filter(product => product.section === "Flash Sales")
   if (status === "failed") return <p className='pt-10 lg:pt-[140px]'>error...</p>
+  const cardsPerPage = 4
+  const [activeCard, setActiveCard] = useState(0)
+  const handelnext = () => {
+    setActiveCard(prev => (prev + cardsPerPage) % flashSale.length)
+  }
+  const handelprev = () => {
+    setActiveCard(prev => (prev - cardsPerPage) % flashSale.length)
+  }
 
   return (
     <div className='pt-10 lg:pt-[140px] '>
       <div className='flex items-end justify-between'>
-        <div className='flex items-end gap-6 lg:gap-[87px]'>
+        <div className='flex items-end gap-4 lg:gap-[87px]'>
           <ProductSection sectionType='Today’s' sectionName='Flash Sales' />
           <Counter />
         </div>
-        <ArrowBtn />
+        <ArrowBtn
+          disabledNext={activeCard + cardsPerPage >= flashSale.length}
+          onClickNext={handelnext}
+          disabledPrev={activeCard === 0}
+          onClickPrev={handelprev}
+        />
+
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-7.5 pt-5 lg:pt-10">
         {status === "loading"
           ? Array.from({ length: 4 }).map((_, index) => (
             <SkeletonCard key={index} />
           ))
-          : flashSale.slice(0, 4).map((product) => (
+          : flashSale.slice(activeCard, activeCard + cardsPerPage).map((product) => (
             <Card key={product._id} product={product} />
           ))}
       </div>
