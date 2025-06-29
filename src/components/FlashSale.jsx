@@ -63,42 +63,68 @@ function FlashSale() {
   )
 }
 function Counter() {
+  const [time, setTime] = useState({
+    days: 30,
+    hours: 23,
+    minutes: 19,
+    seconds: 56,
+  });
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      setTime(prev => {
+        let { days, hours, minutes, seconds } = prev;
+        if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+          clearInterval(countdown);
+          return prev;
+        }
+        if (seconds > 0) {
+          seconds--;
+        } else {
+          seconds = 59;
+          if (minutes > 0) {
+            minutes--;
+          } else {
+            minutes = 59;
+            if (hours > 0) {
+              hours--;
+            } else {
+              hours = 23;
+              if (days > 0) {
+                days--;
+              }
+            }
+          }
+        }
+        return { days, hours, minutes, seconds };
+      });
+    }, 1000);
+    return () => clearInterval(countdown);
+  }, []);
+
   return (
     <div className="flex items-center space-x-1 lg:space-x-4 text-center font-semibold text-black">
-
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col gap-1 items-center">
         <span className="text-[8px] font-medium">Days</span>
-        <span className="text-[12px] lg:text-[32px] font-bold">03</span>
+        <span className="text-[12px] lg:text-[32px] font-bold">{String(time.days).padStart(2, '0')}</span>
       </div>
-
-
       <span className="text-2xl text-red-300">:</span>
-
-
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col gap-1 items-center">
         <span className="text-[8px] font-medium">Hours</span>
-        <span className="text-[12px] lg:text-[32px] font-bold">23</span>
+        <span className="text-[12px] lg:text-[32px] font-bold">{String(time.hours).padStart(2, '0')}</span>
       </div>
-
-
       <span className="text-2xl text-red-300">:</span>
-
-
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col gap-1 items-center">
         <span className="text-[8px] font-medium">Minutes</span>
-        <span className="text-[12px] lg:text-[32px] font-bold">19</span>
+        <span className="text-[12px] lg:text-[32px] font-bold">{String(time.minutes).padStart(2, '0')}</span>
       </div>
-
-
       <span className="text-2xl text-red-300">:</span>
-
-
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col gap-1 items-center">
         <span className="text-[8px] font-medium">Seconds</span>
-        <span className="text-[12px] lg:text-[32px] font-bold">56</span>
+        <span className="text-[12px] lg:text-[32px] font-bold">{String(time.seconds).padStart(2, '0')}</span>
       </div>
     </div>
-  )
+  );
 }
 
 export default FlashSale

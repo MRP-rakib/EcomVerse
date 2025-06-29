@@ -13,6 +13,7 @@ import User from './pages/User.jsx'
 import { Provider } from 'react-redux'
 import store from './redux/store.js'
 import Product from './components/Product.jsx'
+import Login from './pages/Login.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='contact' element={<Contact/>}/>
         <Route path='about' element={<About/>}/>
         <Route path='signup' element={<SignUp/>}/>
+        <Route path='login' element={<Login/>}/>
         <Route path='cart' element={<Cart/>}/>
         <Route path='wishlist' element={<Wishlist/>}/>
         <Route path='user' element={<User/>}/>
