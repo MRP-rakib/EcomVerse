@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import NavHeading from './NavHeading'
 import { IoIosSearch } from "react-icons/io";
 import { CiHeart } from "react-icons/ci";

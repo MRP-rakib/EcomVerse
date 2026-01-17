@@ -11,21 +11,21 @@ import { useNavigate } from 'react-router'
 function OurProduct() {
   const dispatch = useDispatch()
   const { data, status } = useSelector((state) => state.product)
-
+  const [activeCard, setActiveCard] = useState(0)
+  const navigation = useNavigate()
+   
   useEffect(() => {
     dispatch(products())
 
   }, [dispatch])
   if (status === 'failed') return <p className='pt-10 lg:pt-[70px]'>error...</p>
   const cardsPerPage = 8
-  const [activeCard, setActiveCard] = useState(0)
   const handelnext = () => {
     setActiveCard(prev => (prev + cardsPerPage) % data.length)
   }
   const handelprev = () => {
     setActiveCard(prev => (prev - cardsPerPage) % data.length)
   }
-  const navigation = useNavigate()
   const handelSeeAll =()=>{
     navigation('product',{state:{allProduct:data}})
   }

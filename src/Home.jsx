@@ -19,7 +19,6 @@ function Home() {
      <MusicSection/>
      <OurProduct/>
      <NewArrival/>
-     {/* <SkeletonCard/> */}
     </div>
   )
 }

@@ -11,21 +11,21 @@ import { useNavigate } from 'react-router'
 function FlashSale() {
   const dispath = useDispatch()
   const { data, status } = useSelector(state => state.product)
+  const [activeCard, setActiveCard] = useState(0)
+  const navigation = useNavigate()
 
   useEffect(() => {
     dispath(products)
   }, [dispath])
-  const flashSale = data.filter(product => product.section === "Flash Sales")
+  const flashSale = data.filter(product => product.category === "beauty")
   if (status === "failed") return <p className='pt-10 lg:pt-[140px]'>error...</p>
   const cardsPerPage = 4
-  const [activeCard, setActiveCard] = useState(0)
   const handelnext = () => {
     setActiveCard(prev => (prev + cardsPerPage) % flashSale.length)
   }
   const handelprev = () => {
     setActiveCard(prev => (prev - cardsPerPage) % flashSale.length)
   }
-  const navigation = useNavigate()
   const handelSeeAll =()=>{
     navigation('product',{state:{allProduct:flashSale}})
   }

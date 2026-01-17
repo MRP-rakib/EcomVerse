@@ -6,16 +6,16 @@ const wishlistSlice =createSlice({
     reducers:{
         addWishList(state,action){
             const product = action.payload
-            const existanceProduct = state.find(item=>item._id === product._id)
+            const existanceProduct = state.find(item=>item.id === product.id)
             if(existanceProduct){
-               return state.filter(item=>item._id!==product._id)
+               return state.filter(item=>item.id!==product.id)
             }
             else{
                 return [...state,{...product}]
             }
         },
         deleteWishlist(state,action){
-            return state.filter(item=>item._id!==action.payload._id)
+            return state.filter(item=>item.id!==action.payload.id)
         }
     }
 })

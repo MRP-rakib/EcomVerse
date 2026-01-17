@@ -10,14 +10,14 @@ import { useNavigate } from 'react-router'
 function BestSelling() {
   const dispath = useDispatch()
   const { data, status } = useSelector(state => state.product)
+  const navigation = useNavigate()
 
   useEffect(() => {
     dispath(products)
   }, [dispath])
 
-  const bestselling = data.filter(product => product.section === "Best Selling Products")
+  const bestselling = data.filter(product => product.category === "furniture")
   if (status === "failed") return <p className='pt-6 lg:pt-[70px]'>error...</p>
-  const navigation = useNavigate()
   const handelSeeAll =()=>{
     navigation('product',{state:{allProduct:bestselling}})
   }

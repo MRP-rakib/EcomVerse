@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const products = createAsyncThunk("products/fetch",async()=>{
-    const res= await fetch("https://exclusive-backend-api.onrender.com/api/products")
+    const res= await fetch("https://dummyjson.com/products")
     return await res.json()
 })
 const apiSlice = createSlice({
@@ -17,7 +17,7 @@ const apiSlice = createSlice({
         })
         .addCase(products.fulfilled,(state,action)=>{
             state.status= "succeeded"
-            state.data=action.payload
+            state.data=action.payload.products
         })
         .addCase(products.rejected,(state,action)=>{
             state.status= 'failed'
